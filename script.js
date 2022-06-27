@@ -1,36 +1,25 @@
 // translation id
-const searchElement = ['dna-solution', 'Frontend-dev', 'Notification', 'nuxt'];
+const searchElement = ['dna-solution', 'Frontend-dev', 'Notification', 'JERP', 'zaman'];
 
-let nodeElements = document.querySelectorAll('*');
-console.log('nodeElements', nodeElements);
+fetch('https://jsonplaceholder.typicode.com/users')
+    .then((response) => response.json())
+    .then((json) => console.log(json));
 
-nodeElements.forEach((element) => {
-    console.log('element', element);
-    if (element?.firstChild?.nextSibling === null) {
-        console.log('textContent', element.textContent);
-        searchElement.forEach((search) => {
-            if (element.textContent.toLowerCase().includes(search.toLowerCase())) {
-                if (element.innerText) {
-                    element.style.backgroundColor = 'yellow';
-                    console.log('Element', element.innerText);
+// find dom element with text
+function findDomElement(searches) {
+    const nodeElements = document.querySelectorAll('*');
+    nodeElements.forEach((element) => {
+        if (element?.firstChild?.nextSibling === null) {
+            searches.forEach((search) => {
+                if (element.textContent.toLowerCase().includes(search.toLowerCase())) {
+                    if (element.innerText) {
+                        element.style.backgroundColor = 'yellow';
+                        console.log('Element', element.innerText);
+                    }
                 }
-            }
-        });
-    }
-});
+            });
+        }
+    });
+}
 
-/* source code 1 solution */
-// let nodeElements = document.querySelectorAll('.file-name');
-// console.log('nodeElements', nodeElements);
-
-// for (let element of nodeElements) {
-//     console.log('element', element);
-//     for (let i = 0; i < searchElement.length; i++) {
-//         if (element.textContent.toLowerCase().includes(searchElement[i].toLowerCase())) {
-//             if (element.innerText) {
-//                 element.style.backgroundColor = 'yellow';
-//                 console.log('Element', element.innerText);
-//             }
-//         }
-//     }
-// }
+findDomElement(searchElement);

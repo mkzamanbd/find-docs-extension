@@ -1,5 +1,6 @@
 {
     "name": "Find Documents",
+    "description": "Find documents in the database. Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia.",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": ["tabs", "activeTab", "storage", "contextMenus"],
