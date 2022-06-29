@@ -1,9 +1,9 @@
 // translation id
-const searchElement = ['dna-solution', 'Frontend-dev', 'Notification', 'JERP', 'zaman'];
-
-fetch('https://jsonplaceholder.typicode.com/users')
+fetch('http://203.188.245.58:7011/api/get-notification')
     .then((response) => response.json())
-    .then((json) => console.log(json));
+    .then((json) => {
+        findDomElement(json.notifications);
+    });
 
 // find dom element with text
 function findDomElement(searches) {
@@ -11,15 +11,12 @@ function findDomElement(searches) {
     nodeElements.forEach((element) => {
         if (element?.firstChild?.nextSibling === null) {
             searches.forEach((search) => {
-                if (element.textContent.toLowerCase().includes(search.toLowerCase())) {
-                    if (element.innerText) {
-                        element.style.backgroundColor = 'yellow';
-                        console.log('Element', element.innerText);
-                    }
+                if (element.innerText == search.transaction_id) {
+                    element.style.backgroundColor = 'yellow';
+                    element.setAttribute('title', search.android_text);
+                    console.log('Element', element.innerText);
                 }
             });
         }
     });
 }
-
-findDomElement(searchElement);
