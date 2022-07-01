@@ -1,5 +1,5 @@
 // translation id
-fetch('http://203.188.245.58:7011/api/get-notification')
+fetch('https://api.kzaman.me/api/get-notification')
     .then((response) => response.json())
     .then((json) => {
         findDomElement(json.notifications);
@@ -7,14 +7,17 @@ fetch('http://203.188.245.58:7011/api/get-notification')
 
 // find dom element with text
 function findDomElement(searches) {
-    const nodeElements = document.querySelectorAll('*');
+    const nodeElements = document.querySelectorAll('span');
+    console.log("All Element", nodeElements);
     nodeElements.forEach((element) => {
-        if (element?.firstChild?.nextSibling === null) {
+        const transactionId = element?.childNodes[2]?.textContent?.replace(": ", '');
+        if (transactionId) {
             searches.forEach((search) => {
-                if (element.innerText == search.transaction_id) {
-                    element.style.backgroundColor = 'yellow';
+                if (transactionId == search.transaction_id) {
+                    element.children[0].setAttribute('style', 'background: yellow;');
+                    //element.style.backgroundColor = 'yellow';
                     element.setAttribute('title', search.android_text);
-                    console.log('Element', element.innerText);
+                    //console.log('Element', element.innerText);
                 }
             });
         }
