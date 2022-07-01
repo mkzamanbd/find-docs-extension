@@ -8,7 +8,6 @@ fetch('https://api.kzaman.me/api/get-notification')
 // find dom element with text
 function findDomElement(searches) {
     const nodeElements = document.querySelectorAll('span');
-    console.log("All Element", nodeElements);
     nodeElements.forEach((element) => {
         const transactionId = element?.childNodes[2]?.textContent?.replace(": ", '');
         if (transactionId) {
