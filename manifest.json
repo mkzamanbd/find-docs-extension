@@ -20,7 +20,11 @@
     },
     "content_scripts": [
         {
-            "matches": ["http://localhost/*", "http://127.0.0.1/*", "http://managment.io/*", "https://managment.io/*"],
+            "matches": [
+                "http://localhost/*",
+                "http://managment.io/*",
+                "https://managment.io/*"
+            ],
             "js": ["script.js"]
         }
     ]
