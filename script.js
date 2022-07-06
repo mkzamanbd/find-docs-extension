@@ -3,21 +3,28 @@ function findElement() {
     fetch('https://api.kzaman.me/api/get-notification')
         .then((response) => response.json())
         .then((json) => {
-            findDomElement(json.notifications);
+            findDomElement(json);
         });
 
     // find dom element with text
-    function findDomElement(searches) {
-        const nodeElements = document.querySelectorAll('span');
+    function findDomElement({ notifications, nagad_messages }) {
+        const nodeElements = document.querySelectorAll('td span');
         nodeElements.forEach((element) => {
-            const transactionId = element?.childNodes[1]?.textContent?.replace(": ", '');
+            const transactionId = element?.childNodes[1]?.textContent?.replace(': ', '');
             if (transactionId) {
-                searches.forEach((search) => {
-                    if (transactionId == search.transaction_id) {
-                        element.children[0].setAttribute('style', 'background: yellow;');
-                        //element.style.backgroundColor = 'yellow';
-                        element.setAttribute('title', search.android_text);
-                        //console.log('Element', element.innerText);
+                notifications.forEach((item) => {
+                    if (transactionId == item.transaction_id) {
+                        element.children[0]?.setAttribute('style', 'background: #ffc107;');
+                        element.setAttribute('title', item.android_text);
+                    }
+                });
+            }
+            const mobile = element?.childNodes[7]?.textContent?.replace(': ', '');
+            if (mobile) {
+                nagad_messages.forEach((item) => {
+                    if (mobile == item.mobile) {
+                        element.children[4]?.setAttribute('style', 'background: #dc3545; color: white;');
+                        element.children[4]?.setAttribute('title', item.android_text);
                     }
                 });
             }
