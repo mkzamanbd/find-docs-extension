@@ -1,6 +1,6 @@
 function findElement() {
     // translation id
-    fetch('https://api.kzaman.me/api/get-notification')
+    fetch('https://softxilla.com/api/get-notification')
         .then((response) => response.json())
         .then((json) => {
             findDomElement(json);
